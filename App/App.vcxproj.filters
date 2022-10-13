@@ -19,4 +19,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Build\Assesets\Shader\basic.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Build\Assesets\Shader\basic.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Build\Assesets\Shader\basic.prog">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
