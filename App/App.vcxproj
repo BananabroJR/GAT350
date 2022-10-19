@@ -143,6 +143,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Build\Assesets\Materials\box.mtrl" />
     <None Include="..\Build\Assesets\Shader\basic.frag" />
     <None Include="..\Build\Assesets\Shader\basic.prog" />
     <None Include="..\Build\Assesets\Shader\basic.vert" />

@@ -2,8 +2,8 @@
 #include <iostream> 
 
 float points[] = {
-  -1.0f, -0.5f,  0.0f,
-   -1.0f,  0.5f,  0.0f,
+  -1.0f, -1.0f,  0.0f,
+   -1.0f,  1.0f,  0.0f,
    1.0f, -1.0f,  0.0f,
 
    -1.0f, 1.0f, 0.0f,
@@ -29,7 +29,7 @@ glm::uvec2 texcoords[]
 	{0,1},
 	{1,1},
 	{1,0},
-};
+}; 
 
 const char* vertex_shader =
 "#version 430 core\n"
@@ -59,7 +59,7 @@ int main(int argc, char** argv)
 
 	LOG("Engine Initilised");
 
-	Skyers::g_renderer.CreateWindow("Neumont", 800, 600);
+	Skyers::g_renderer.CreateWindow("Skyersmont", 800, 600);
 	LOG("Window Made");
 
 	// create vertex buffer
@@ -95,34 +95,13 @@ int main(int argc, char** argv)
 	glBindBuffer(GL_ARRAY_BUFFER, tvbo);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	// create shader
-	std::shared_ptr<Skyers::Shader> vs = Skyers::g_resources.Get<Skyers::Shader>("Shader/basic.vert",GL_VERTEX_SHADER);
-	std::shared_ptr<Skyers::Shader> fs = Skyers::g_resources.Get<Skyers::Shader>("Shader/basic.frag",GL_FRAGMENT_SHADER);
-
-
-	/*GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vs, 1, &vertex_shader, NULL);
-	glCompileShader(vs);
-	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fs, 1, &fragment_shader, NULL);
-	glCompileShader(fs);*/
+	std::shared_ptr<Skyers::Material> material = Skyers::g_resources.Get<Skyers::Material>("materials/box.mtrl");
+	material->Bind();
 
 	// create program
-	GLuint program = glCreateProgram();
-	glAttachShader(program, fs->m_shader);
-	glAttachShader(program, vs->m_shader);
-	glLinkProgram(program);
-	glUseProgram(program);
-
-
-	GLint uniform1 = glGetUniformLocation(program, "scale");
-	GLint uniform2 = glGetUniformLocation(program, "tint");
-	GLint uniform3 = glGetUniformLocation(program, "transform");
-
-		
-	glUniform3f(uniform2, 1,0,0);
-
-	
+	std::shared_ptr<Skyers::Program> program = Skyers::g_resources.Get<Skyers::Program>("Shader/basic.prog",GL_PROGRAM); 
+	program->Link();
+	program->Use();
 
 	glm::mat4 mx{1};
 
@@ -133,9 +112,13 @@ int main(int argc, char** argv)
 
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 
-		glUniform1f(uniform1,std::sin(Skyers::g_time.time));
+		
 		mx = glm::eulerAngleXYX(0.0f,0.0f,Skyers::g_time.time);
-		glUniformMatrix4fv(uniform3, 1,GL_FALSE,glm::value_ptr(mx));
+		material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
+		material->GetProgram()->SetUniform("scale", 0.5f);
+
+		material->GetProgram()->SetUniform("scale", std::sin(Skyers::g_time.time * 3));
+		material->GetProgram()->SetUniform("transform", mx);
 		
 		Skyers::g_renderer.BeginFrame();
 

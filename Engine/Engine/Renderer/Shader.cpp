@@ -4,7 +4,7 @@
 
 namespace Skyers
 {
-	Skyers::Shader::~Shader()
+	Shader::~Shader()
 	{
 		if (m_shader != 0)
 		{
@@ -12,7 +12,7 @@ namespace Skyers
 		}
 	}
 
-	bool Skyers::Shader::Create(std::string filename, ...)
+	bool Shader::Create(std::string filename, ...)
 	{
 		// get shader source from file
 		std::string source;

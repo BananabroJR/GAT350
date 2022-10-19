@@ -16,9 +16,11 @@
 #include "Framework/Singleton.h"
 #include "Framework/EventManager.h"
 
-#include "Components/PlayerComponent.h"
 #include "Components/AudioComponent.h"
+#include "Components/CameraComponent.h"
 #include "Components/CollisionComponent.h"
+#include "Components/CharacterComponent.h"
+#include "Components/PlayerComponent.h"
 #include "Components/PhysicsComponent.h"
 #include "Components/RBPhysicsComponent.h"
 #include "Components/ModelComponent.h"
@@ -26,20 +28,20 @@
 #include "Components/SpriteAnimComponent.h"
 #include "Components/TextComponent.h"
 #include "Components/TilemapComponent.h"
-#include "Components/CharacterComponent.h"
-#include "Components/CameraComponent.h"
 
-#include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
-#include "Resource/ResourceManager.h"
+#include "Input/InputSystem.h"
 #include "Physics/PhysicsSystem.h"
+#include "Resource/ResourceManager.h"
 
-#include "Renderer/Renderer.h"
-#include "Renderer/Text.h"
 #include "Renderer/Font.h"
-#include "Renderer/Texture.h"
 #include "Renderer/Model.h"
+#include "Renderer/Program.h"
+#include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
+#include "Renderer/Text.h"
+#include "Renderer/Texture.h"
+#include "Renderer/Material.h"
 
 #include <memory>
 #include <vector>

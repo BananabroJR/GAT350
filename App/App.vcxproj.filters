@@ -29,5 +29,8 @@
     <None Include="..\Build\Assesets\Shader\basic.prog">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\Build\Assesets\Materials\box.mtrl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
