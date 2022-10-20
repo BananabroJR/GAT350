@@ -12,6 +12,7 @@ namespace Skyers
 		{
 
 			LOG("Could not load program file (%s).", filename.c_str());
+			__debugbreak();
 			return false;
 		}
 

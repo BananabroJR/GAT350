@@ -42,6 +42,7 @@
 #include "Renderer/Text.h"
 #include "Renderer/Texture.h"
 #include "Renderer/Material.h"
+#include "Renderer/VertexBuffer.h"
 
 #include <memory>
 #include <vector>
