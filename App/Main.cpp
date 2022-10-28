@@ -56,28 +56,21 @@ int main(int argc, char** argv)
 
 	LOG("Engine Initilised");
 
-	Skyers::g_renderer.CreateWindow("Skmont", 800, 600);
+	Skyers::g_renderer.CreateWindow("Neumont", 800, 600);
 	LOG("Window Made");
 
 	
 	//create vertex buffer
-	std::shared_ptr<Skyers::VertexBuffer> vb = Skyers::g_resources.Get<Skyers::VertexBuffer>("box");
-	vb->CreateVertexBuffer(sizeof(vertices), 36, vertices);
-	vb->SetAttribute(0, 3, 8 * sizeof(float), 0);
-	vb->SetAttribute(1, 3, 8 * sizeof(float), 3 * sizeof(float));
-	vb->SetAttribute(2, 2, 8 * sizeof(float), 6 * sizeof(float));
+	
 
+	auto m = Skyers::g_resources.Get<Skyers::Model>("Models/ogre.obj");
 
-	std::shared_ptr<Skyers::Material> material = Skyers::g_resources.Get<Skyers::Material>("Materials/box.mtrl");
+	std::shared_ptr<Skyers::Material> material = Skyers::g_resources.Get<Skyers::Material>("Materials/ogre.mtrl");
 	material->Bind();
-
-	// create program
-	//std::shared_ptr<Skyers::Program> program = Skyers::g_resources.Get<Skyers::Program>("Shaders/basic.prog",GL_PROGRAM); 
-	//program->Link();
-	//program->Use();
-
-	material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
-	material->GetProgram()->SetUniform("scale", 0.5f);
+	
+	//material->GetProgram()->SetUniform("model", glm::mat4(1));
+	//material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
+	//material->GetProgram()->SetUniform("scale", 0.5f);
 
 	
 	glm::mat4 model{1};
@@ -100,6 +93,8 @@ int main(int argc, char** argv)
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 		//add input to move camera (I will do this after i go to tutoring and get the box to draw at all)
 
+
+
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_left) == Skyers::InputSystem::KeyState::Held) cameraPosition.x -= speed * Skyers::g_time.deltaTime;
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_right) == Skyers::InputSystem::KeyState::Held)cameraPosition.x += speed * Skyers::g_time.deltaTime;
 		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_down) == Skyers::InputSystem::KeyState::Held)cameraPosition.y -= speed * Skyers::g_time.deltaTime;
@@ -109,20 +104,24 @@ int main(int argc, char** argv)
 		//model = glm::eulerAngleXYX(0.0f, Skyers::g_time.time,0.0f);
 
 		glm::mat4 view = glm::lookAt(cameraPosition, cameraPosition + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
-		
+
+		glm::mat4 mvp = projection * view * glm::mat4(1);
+		material->GetProgram()->SetUniform("mvp", mvp);
+
+
 		Skyers::g_renderer.BeginFrame();
 
+		m->m_vertexBuffer.Draw();
+	//	for (size_t i = 0; i < transform.size(); i++)
+		//{
+		//	transform[i].rotation += glm::vec3{ 0,90 * Skyers::g_time.deltaTime,0 };
 
-		for (size_t i = 0; i < transform.size(); i++)
-		{
-			transform[i].rotation += glm::vec3{ 0,90 * Skyers::g_time.deltaTime,0 };
+		//	glm::mat4 mvp = projection * view * (glm::mat4)transform[i];
+		//	material->GetProgram()->SetUniform("mvp", mvp);
 
-			glm::mat4 mvp = projection * view * (glm::mat4)transform[i];
-			material->GetProgram()->SetUniform("mvp", mvp);
+		//	vb->Draw();
 
-			vb->Draw();
-
-		}
+		//}
 		
 		Skyers::g_renderer.EndFrame();
 	}

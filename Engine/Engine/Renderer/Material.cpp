@@ -46,7 +46,7 @@ namespace Skyers
 		m_program->Use();
 		for (auto& texture : m_textures)
 		{
-			texture->Bind();
+			//texture->Bind();
 		}
 	}
 }
