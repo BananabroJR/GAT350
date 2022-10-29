@@ -145,9 +145,13 @@
   <ItemGroup>
     <None Include="..\Build\Assesets\Materials\box.mtrl" />
     <None Include="..\Build\Assesets\Materials\ogre.mtrl" />
+    <None Include="..\Build\Assesets\Scenes\basic.scn" />
     <None Include="..\Build\Assesets\Shaders\basic.frag" />
     <None Include="..\Build\Assesets\Shaders\basic.prog" />
     <None Include="..\Build\Assesets\Shaders\basic.vert" />
+    <None Include="..\Build\Assesets\Shaders\basic_lit.frag" />
+    <None Include="..\Build\Assesets\Shaders\basic_lit.prog" />
+    <None Include="..\Build\Assesets\Shaders\basic_lit.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

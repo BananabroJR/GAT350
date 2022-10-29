@@ -1,50 +1,6 @@
 #include "Engine.h" 
 #include <iostream> 
 
-float vertices[] = {
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-
-	-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-
-	-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-
-	-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-	 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-	-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-	-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f
-};
-
 int main(int argc, char** argv)
 {
 	LOG("Application Started");
@@ -59,19 +15,24 @@ int main(int argc, char** argv)
 	Skyers::g_renderer.CreateWindow("Neumont", 800, 600);
 	LOG("Window Made");
 
-	
-	//create vertex buffer
-	
 
-	auto m = Skyers::g_resources.Get<Skyers::Model>("Models/ogre.obj");
+	// load scene 
+	auto scene = std::make_unique<Skyers::Scene>();
 
-	std::shared_ptr<Skyers::Material> material = Skyers::g_resources.Get<Skyers::Material>("Materials/ogre.mtrl");
-	material->Bind();
+	rapidjson::Document document;
+	bool success = Skyers::json::Load("scenes/basic.scn", document);
+	if (!success)
+	{
+		LOG("error loading scene file %s.", "scenes/basic.scn");
+	}
+	else
+	{
+		scene->Read(document);
+		scene->Initialize();
+	}
+		
+	//create the model
 	
-	//material->GetProgram()->SetUniform("model", glm::mat4(1));
-	//material->GetProgram()->SetUniform("tint", glm::vec3{ 1, 0, 0 });
-	//material->GetProgram()->SetUniform("scale", 0.5f);
-
 	
 	glm::mat4 model{1};
 	glm::mat4 projection = glm::perspective(45.0f, Skyers::g_renderer.GetWidth() / (float)Skyers::g_renderer.GetHeight(), 0.01f,100.0f);
@@ -88,44 +49,26 @@ int main(int argc, char** argv)
 	while (!quit)
 	{
 		Skyers::Engine::Instance().Update();
-		float speed = 3;
-
-		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
-		//add input to move camera (I will do this after i go to tutoring and get the box to draw at all)
-
-
-
-		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_left) == Skyers::InputSystem::KeyState::Held) cameraPosition.x -= speed * Skyers::g_time.deltaTime;
-		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_right) == Skyers::InputSystem::KeyState::Held)cameraPosition.x += speed * Skyers::g_time.deltaTime;
-		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_down) == Skyers::InputSystem::KeyState::Held)cameraPosition.y -= speed * Skyers::g_time.deltaTime;
-		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_up) == Skyers::InputSystem::KeyState::Held)cameraPosition.y += speed * Skyers::g_time.deltaTime;
 		
+		if (Skyers::g_inputSystem.GetKeyState(Skyers::key_escape) == Skyers::InputSystem::KeyState::Pressed) quit = true;
 
-		//model = glm::eulerAngleXYX(0.0f, Skyers::g_time.time,0.0f);
 
-		glm::mat4 view = glm::lookAt(cameraPosition, cameraPosition + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
+		auto actor = scene->GetActorFromName("Ogre");
+		if (actor)
+		{
+			actor->m_transform.rotation.y += Skyers::g_time.deltaTime * 90.0f;
+		}
 
-		glm::mat4 mvp = projection * view * glm::mat4(1);
-		material->GetProgram()->SetUniform("mvp", mvp);
-
+		scene->Update();
 
 		Skyers::g_renderer.BeginFrame();
 
-		m->m_vertexBuffer.Draw();
-	//	for (size_t i = 0; i < transform.size(); i++)
-		//{
-		//	transform[i].rotation += glm::vec3{ 0,90 * Skyers::g_time.deltaTime,0 };
-
-		//	glm::mat4 mvp = projection * view * (glm::mat4)transform[i];
-		//	material->GetProgram()->SetUniform("mvp", mvp);
-
-		//	vb->Draw();
-
-		//}
+		scene->Draw(Skyers::g_renderer);
+	
 		
 		Skyers::g_renderer.EndFrame();
 	}
-
+	scene->RemoveAll();
 	Skyers::Engine::Instance().Shutdown();
 
 	return 0;

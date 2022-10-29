@@ -1,5 +1,5 @@
-#pragma once
-#include "RenderComponent.h"
+#pragma once 
+#include "RenderComponent.h" 
 
 namespace Skyers
 {
@@ -15,6 +15,7 @@ namespace Skyers
 			virtual void Update() override {}
 		virtual void Draw(Renderer& renderer) override;
 
+
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
@@ -23,4 +24,3 @@ namespace Skyers
 		std::shared_ptr<Material> material;
 	};
 }
-

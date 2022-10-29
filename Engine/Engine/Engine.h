@@ -29,6 +29,7 @@
 #include "Components/SpriteAnimComponent.h"
 #include "Components/TextComponent.h"
 #include "Components/TilemapComponent.h"
+#include "Components/CameraController.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
