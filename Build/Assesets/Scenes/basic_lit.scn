@@ -23,8 +23,30 @@
             "components": [
                 {
                     "type": "ModelComponent",
-                    "model_name": "Models/ogre.obj",
+                    "model_name": "Models/sphere.obj",
                     "material_name": "Materials/ogre.mtrl"
+                }
+            ]
+        },
+        {
+            "type": "Actor",
+            "name": "Light",
+            "transform": {
+                "position": [
+                    5,
+                    5,
+                    5
+
+                ]
+            },
+            "components": [
+                {
+                    "type": "LightComponent",
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
                 }
             ]
         },

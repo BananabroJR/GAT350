@@ -30,6 +30,7 @@
 #include "Components/TextComponent.h"
 #include "Components/TilemapComponent.h"
 #include "Components/CameraController.h"
+#include "Components/LightComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"

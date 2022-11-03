@@ -20,10 +20,10 @@ int main(int argc, char** argv)
 	auto scene = std::make_unique<Skyers::Scene>();
 
 	rapidjson::Document document;
-	bool success = Skyers::json::Load("scenes/basic.scn", document);
+	bool success = Skyers::json::Load("scenes/basic_lit.scn", document);
 	if (!success)
 	{
-		LOG("error loading scene file %s.", "scenes/basic.scn");
+		LOG("error loading scene file %s.", "scenes/basic_lit.scn");
 	}
 	else
 	{
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 	}
 		
 	//create the model
-	
+	//auto scene = Skyers::g_resources.Get<Skyers::Scene>("Scenes/basic.scn");
 	
 	glm::mat4 model{1};
 	glm::mat4 projection = glm::perspective(45.0f, Skyers::g_renderer.GetWidth() / (float)Skyers::g_renderer.GetHeight(), 0.01f,100.0f);
